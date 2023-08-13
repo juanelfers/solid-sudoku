@@ -1,5 +1,8 @@
 class SudokuBoard {
-    #playable;
+    #playable: any;
+    size: number;
+    levels: any;
+    board: any;
 
     constructor() {
         this.size = 9;
@@ -20,16 +23,16 @@ class SudokuBoard {
         return board;
     }
 
-    getPlayableNumbers(grid, cell) {
+    getPlayableNumbers(grid: any, cell: any) {
         // const row = [this.#playable]
-        console.log({grid, cell})
+        console.log({ grid, cell })
         return [...Array(this.size)].map((_, i) => i + 1).filter(n => !this.#playable[grid].includes(n))
     }
 
     makePlayable(level = 'easy') {
-        this.#playable = this.board.map((row) => {
+        this.#playable = this.board.map((row: any) => {
             const map = this.#getMap(level);
-            return row.map((cell, colIndex) => (map[colIndex] ? cell : ''));
+            return row.map((cell: any, colIndex: any) => (map[colIndex] ? cell : ''));
         });
 
         return this.getPlayable();
@@ -39,13 +42,13 @@ class SudokuBoard {
         return JSON.parse(JSON.stringify(this.#playable))
     }
 
-    play(number, x, y) {
+    play(number: any, x: any, y: any) {
         this.#playable[x][y] = number;
 
         return this.getPlayable();
     }
 
-    #getMap(level) {
+    #getMap(level: any) {
         const map = Array(this.size).fill(true);
         let count = this.levels[level];
         while (count !== 0) {
@@ -58,7 +61,7 @@ class SudokuBoard {
         return map;
     }
 
-    #fillBoard(board) {
+    #fillBoard(board: any) {
         const size = board.length;
         for (let row = 0; row < size; row++) {
             for (let col = 0; col < size; col++) {
@@ -79,7 +82,7 @@ class SudokuBoard {
         return true;
     }
 
-    #isValidNumber(board, row, col, num) {
+    #isValidNumber(board: any, row: any, col: any, num: any) {
         const size = board.length;
         for (let i = 0; i < size; i++) {
             if (board[row][i] === num || board[i][col] === num) {

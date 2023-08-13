@@ -3,8 +3,8 @@ import Pad from "./Pad";
 
 interface CellProps {
     number: number;
+    play: Function;
     playableNumber: Function;
-    Pad: JSX.Element;
 }
 
 export default function Cell(props: CellProps): JSX.Element {
@@ -15,7 +15,7 @@ export default function Cell(props: CellProps): JSX.Element {
     const background = getBackground(props.number, isEmpty);
     const style = { background }
 
-    const onClick = (event, number) => {
+    const onClick = (event: any, number: Number) => {
         event.stopPropagation();
         setActive(false);
         props.play(number);

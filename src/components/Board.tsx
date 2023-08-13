@@ -1,20 +1,24 @@
 import { For } from "solid-js";
 import Cell from "./Cell";
 
-export default function Board(props) {
+interface BoardProps {
+    board: any;
+    play: Function;
+    playableNumbers: Function;
+}
+
+export default function Board(props: BoardProps) {
     return (
         <For each={props.board}>
             {(grid: any, gridIndex: Function) => (
-                <div class="block" data-block={Math.random()}>
+                <div class="block">
                     <For each={grid}>
-                        {(cell: number, cellIndex: Function) => {
-                            return (
-                                <Cell
-                                    number={cell}
-                                    playableNumber={(number) => props.playableNumbers(gridIndex(), cellIndex()).includes(number)}
-                                    play={(number) => props.play(number, gridIndex(), cellIndex())} />
-                            )
-                        }}
+                        {(cell: number, cellIndex: Function) => (
+                            <Cell
+                                number={cell}
+                                playableNumber={(number: Number) => props.playableNumbers(gridIndex(), cellIndex()).includes(number)}
+                                play={(number: Number) => props.play(number, gridIndex(), cellIndex())} />
+                        )}
                     </For>
                 </div>
             )}
